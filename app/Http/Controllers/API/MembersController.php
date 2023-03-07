@@ -10,6 +10,7 @@ use Exception;
 
 class MembersController extends Controller
 {
+
     /**
      * GET ALL MEMBERS
      */
@@ -17,9 +18,8 @@ class MembersController extends Controller
     {
          /**
            * Members is Models
-           */
+          */
         $data = Members::all();
-        
         if ($data) {
           return ApiResponse::createApi(200, 'Success', $data);
         } else {
@@ -27,6 +27,7 @@ class MembersController extends Controller
         }
         
     }
+
 
     /**
      * CREATE MEMBERS 
@@ -39,10 +40,11 @@ class MembersController extends Controller
                 'address' => 'required',
             ]);
 
-            /**
+           /**
            * members is table database
            * Members is Models
            */
+
             $members = Members::create([
                 'username' => $request->username,
                 'address' => $request->address,
@@ -52,7 +54,8 @@ class MembersController extends Controller
 
         if ($data) {
           return ApiResponse::createApi(200, 'Success', $data);
-        } else {
+        } 
+        else {
           return ApiResponse::createApi(400, 'Failed');
         }
 
@@ -76,7 +79,6 @@ class MembersController extends Controller
         } else {
           return ApiResponse::createApi(400, 'Failed');
         }
-
     }
 
 
