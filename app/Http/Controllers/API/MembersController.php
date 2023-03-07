@@ -16,7 +16,7 @@ class MembersController extends Controller
     public function membersList()
     {
          /**
-           * Members model
+           * Members is Models
            */
         $data = Members::all();
         
@@ -40,8 +40,8 @@ class MembersController extends Controller
             ]);
 
             /**
-           * members table database
-           * Members model
+           * members is table database
+           * Members is Models
            */
             $members = Members::create([
                 'username' => $request->username,
@@ -61,12 +61,13 @@ class MembersController extends Controller
         }
     }
 
+
     /**
      * DETAIL MEMBERS
      */
     public function membersDetail(string $id)
     {
-        // Members MODEL
+        // Members Models
         // $id id members
          $data = Members::where('id', '=', $id)->get();
 
@@ -78,11 +79,12 @@ class MembersController extends Controller
 
     }
 
+
     /**
      * DELETE MEMBERS
      */
     public function membersDelete(string $id)
     {
-        //
+      // DELETE MEMEBERS THIS
     }
 }
