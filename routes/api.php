@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\MembersController;
+use App\Http\Controllers\API\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,11 @@ use App\Http\Controllers\API\MembersController;
 |
 */
 
+
+/**
+ * CRUD MEMBERS
+*/
+
 // GET ALL MEMEBERS
 Route::get('members/list', [MembersController::class, 'membersList']);
 
@@ -24,6 +30,22 @@ Route::post('members/create', [MembersController::class, 'membersCreate']);
 // DETAIL MEMBERS
 Route::get('members/detail/{id}', [MembersController::class, 'membersDetail']);
 
+// UPDATE MEMBERS 
+Route::post('members/update/{id}', [MembersController::class, 'membersUpdate']);
+
+// DELETE MEMBERS
+Route::post('members/delete/{id}', [MembersController::class, 'membersDelete']);
+
+
+/**
+ * CRUD MAHASISWA
+*/
+
+// GET ALL MAHASISWA
+Route::get('mahasiswa/list', [MahasiswaController::class, 'mahasiswaList']);
+
+// CREATE 
+Route::post('mahasiswa/create', [MahasiswaController::class, 'mahasiswaCreate']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

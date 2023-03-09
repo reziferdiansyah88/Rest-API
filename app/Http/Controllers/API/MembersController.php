@@ -12,13 +12,15 @@ class MembersController extends Controller
 {
 
     /**
-     * GET ALL MEMBERS
+     * ALL MEMBERS
      */
     public function membersList()
     {
          /**
-           * Members is Models
+           * Members is Models -> from Models Members.php
+           * createApi -> function From Helpers ApiResponse.php
           */
+
         $data = Members::all();
         if ($data) {
           return ApiResponse::createApi(200, 'Success', $data);
@@ -42,7 +44,8 @@ class MembersController extends Controller
 
            /**
            * members is table database
-           * Members is Models
+           * Members is Models -> from Models Members.php
+           * createApi -> function From Helpers ApiResponse.php
            */
 
             $members = Members::create([
@@ -70,8 +73,13 @@ class MembersController extends Controller
      */
     public function membersDetail(string $id)
     {
-        // Members Models
-        // $id id members
+      
+        /**
+           * Members is Models -> from Models Members.php
+           * $id id members
+           * createApi -> function From Helpers ApiResponse.php
+           */
+
          $data = Members::where('id', '=', $id)->get();
 
         if ($data) {
@@ -82,11 +90,74 @@ class MembersController extends Controller
     }
 
 
+     /**
+     * UPDATE MEMBERS
+     */
+
+     public function membersUpdate(Request $request, $id) {
+
+      try {
+        $request -> validate([
+          'username' => 'required',
+          'address' => 'required'
+        ]);
+
+         /**
+           * members is table database
+           * Members is Models -> from Models Members.php
+           * $id id members
+           * createApi -> function From Helpers ApiResponse.php
+           */
+       $members = Members::findOrFail($id);
+
+        $members -> update([
+           'username' => $request->username,
+           'address' => $request->address,
+        ]);
+
+
+        // GET DATA UPDATE UPDATE
+        $data = Members::where('id', '=', $members->id)->get();
+
+        if ($data) {
+          return ApiResponse::createApi(200, 'Success', $data);
+        } 
+        else {
+          return ApiResponse::createApi(400, 'Failed');
+        }
+     
+        } catch (Exception $error) {
+            return ApiResponse::createApi(400, 'Failed');
+        }
+     }
+
+
     /**
      * DELETE MEMBERS
      */
     public function membersDelete(string $id)
     {
-      // DELETE MEMEBERS THIS
+      try {
+
+        /**
+        * members is table database
+        * Members is Models -> from Models Members.php
+        * $id id members
+        * createApi -> function From Helpers ApiResponse.php
+        */
+
+       $members = Members::findOrFail($id);
+       $data =  $members -> delete();
+
+       if ($data) {
+          return ApiResponse::createApi(200, 'Success Delete Members');
+        } 
+        else {
+          return ApiResponse::createApi(400, 'Failed');
+        }
+
+      } catch (Exception $error) {
+        return ApiResponse::createApi(400, 'Failed');
+      }
     }
 }
