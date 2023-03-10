@@ -44,8 +44,18 @@ Route::post('members/delete/{id}', [MembersController::class, 'membersDelete']);
 // GET ALL MAHASISWA
 Route::get('mahasiswa/list', [MahasiswaController::class, 'mahasiswaList']);
 
-// CREATE 
+// CREATE MAHASISWA
 Route::post('mahasiswa/create', [MahasiswaController::class, 'mahasiswaCreate']);
+
+// DETAIL MAHASISWA
+Route::get('mahasiswa/detail/{id}', [MahasiswaController::class, 'mahasiswaDetail']);
+
+// UPDATE MAHASISWA
+Route::post('mahasiswa/update/{id}', [MahasiswaController::class, 'mahasiswaUpdate']);
+
+// DELETE MAHASISWA
+Route::post('mahasiswa/delete/{id}', [MahasiswaController::class, 'mahasiswaDelete']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
