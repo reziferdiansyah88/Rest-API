@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 /**
 * No Helpers file 
 * Response here
+* Test
 */
 
 class MahasiswaController extends Controller
@@ -22,19 +23,23 @@ class MahasiswaController extends Controller
     {
          /**
            * Mahasiswa is Models -> from Models Members.php
+           * Pagination
           */
-        // $dataMahasiswa = Mahasiswa::all();
-        // $name = $request->input('name');
-        // PAGINATION 10
-        $dataMahasiswa = Mahasiswa::simplePaginate(10);
 
-        if ($dataMahasiswa) {
+        $searchName = $request-> searchName ?? '' ;
+        $dataSearch = Mahasiswa::where('name', 'LIKE', '%'. $searchName. '%');
+
+        // PAGINATION
+        $data = $dataSearch->paginate(10);
+
+        if ($data) {
             return response()->json([
                 'code' => 200,
                 'message' => 'Success',
-                'data' => $dataMahasiswa,
+                'data' => $data,
            ], 200);
         }
+
         else {
           return response()->json([
                 'code' => 400,
@@ -51,11 +56,11 @@ class MahasiswaController extends Controller
     $validator = Validator::make(
           $request->all(),
             [
-              // required and unique => Unique validation check by model
-               'nim' => 'required|unique:App\Models\Mahasiswa,nim',
+              // required, integer, email and unique => Unique validation check by model
+               'nim' => 'required|integer|unique:App\Models\Mahasiswa,nim',
                'name' => 'required|unique:App\Models\Mahasiswa,name',
                'address' => 'required',
-               'email' => 'required|unique:App\Models\Mahasiswa,email'
+               'email' => 'required|email|unique:App\Models\Mahasiswa,email'
             ],
             [
                 // required validation
@@ -117,12 +122,12 @@ class MahasiswaController extends Controller
     public function mahasiswaUpdate(Request $request, $id) {
       $validator = Validator::make(
             $request->all(),
-            // required and unique update
+            // required, email, integer
             [
-               'nim' => 'required',
+               'nim' => 'required|integer',
                'name' => 'required',
                'address' => 'required',
-               'email' => 'required'
+               'email' => 'required|email'
             ],
             [
                 // required validation update
