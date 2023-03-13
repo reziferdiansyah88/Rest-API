@@ -39,6 +39,7 @@ Route::post('members/delete/{id}', [MembersController::class, 'membersDelete']);
 
 /**
  * CRUD MAHASISWA
+ * ADD PAGINATION AND SEARCH IN LIST MAHASISWA
 */
 
 // GET ALL MAHASISWA
