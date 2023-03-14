@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 /**
 * No Helpers file 
 * Response here
-* Test
+* 
 */
 
 class MahasiswaController extends Controller
@@ -26,11 +26,20 @@ class MahasiswaController extends Controller
            * Pagination
           */
 
-        $searchName = $request-> searchName ?? '' ;
-        $dataSearch = Mahasiswa::where('name', 'LIKE', '%'. $searchName. '%');
+        $fieldInput = $request-> InputSearch ?? '' ;
+     
 
         // PAGINATION
         $data = $dataSearch->paginate(10);
+
+
+        if($fieldInput === ''){
+        // $fieldInput === ''
+        }elseif ($fieldInput === 'name'){
+         $dataSearch = Mahasiswa::where('name', 'LIKE', '%'. $InputSearch. '%');
+        }elseif ($fieldInput === 'nim') {
+         $dataSearch = Mahasiswa::where('nim', 'LIKE', '%'. $InputSearch. '%');
+        };
 
         if ($data) {
             return response()->json([
