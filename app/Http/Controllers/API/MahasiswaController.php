@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 /**
 * No Helpers file 
 * Response here
-* 
+* CRUD
 */
 
 class MahasiswaController extends Controller
