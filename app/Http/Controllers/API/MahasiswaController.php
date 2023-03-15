@@ -18,6 +18,7 @@ class MahasiswaController extends Controller
 {
     /**
      * GET ALL MAHASISWA
+     * TEST
      */
     public function mahasiswaList(Request $request)
     {
