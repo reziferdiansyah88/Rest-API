@@ -33,13 +33,13 @@ class MahasiswaController extends Controller
         $data = $dataSearch->paginate(10);
 
 
-        // if($fieldInput === ''){
-        // // $fieldInput === ''
-        // }elseif ($fieldInput === 'name'){
-        //  $dataSearch = Mahasiswa::where('name', 'LIKE', '%'. $InputSearch. '%');
-        // }elseif ($fieldInput === 'nim') {
-        //  $dataSearch = Mahasiswa::where('nim', 'LIKE', '%'. $InputSearch. '%');
-        // };
+        if($fieldInput === ''){
+        // $fieldInput === ''
+        }elseif ($fieldInput === 'name'){
+         $dataSearch = Mahasiswa::where('name', 'LIKE', '%'. $InputSearch. '%');
+        }elseif ($fieldInput === 'nim') {
+         $dataSearch = Mahasiswa::where('nim', 'LIKE', '%'. $InputSearch. '%');
+        };
 
         if ($data) {
             return response()->json([
